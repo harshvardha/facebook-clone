@@ -13,7 +13,7 @@ authenticationRouter.post(
     [
         check("email").normalizeEmail().isEmail().isLength({ max: 50 }),
         check("username").isLength({ min: 3, max: 20 }),
-        check("password").isLength({ min: 6 })
+        check("passWord").isLength({ min: 6 })
     ],
     postRegisterNewUser
 );

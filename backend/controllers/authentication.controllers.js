@@ -25,7 +25,7 @@ const postRegisterNewUser = async (req, res, next) => {
             email,
             password: hashedPassword
         });
-        const { password, ...others } = newUser;
+        const { password, ...others } = newUser._doc;
         res.status(StatusCodes.CREATED).json(others);
     } catch (error) {
         console.log(error);
@@ -50,9 +50,9 @@ const postLoginUser = async (req, res, next) => {
         }
         const accessToken = jsonwebtoken.sign({
             id: user._id
-        }, process.env.ACESS_TOKEN_SECRET, { expiresIn: "20m" });
+        }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "20m" });
         const { password, ...others } = user._doc;
-        res.cookie("access_token", accessToken).status(StatusCodes.OK).json(others);
+        res.status(StatusCodes.OK).json({ accessToken, others });
     } catch (error) {
         console.log(error);
         next(error);
