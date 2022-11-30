@@ -6,6 +6,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import authenticationRouter from "./routes/authentication.routes.js";
 import userRouter from "./routes/users.routes.js";
+import postRouter from "./routes/posts.router.js";
 dotenv.config();
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(cors({
 
 app.use("/authentication", authenticationRouter);
 app.use("/users", userRouter);
+app.use("/posts", postRouter);
 
 app.use((error, req, res, next) => {
     const status = error.status || 500;
