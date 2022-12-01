@@ -22,7 +22,7 @@ authenticationRouter.post(
 authenticationRouter.post(
     "/login",
     [
-        check("email").normalizeEmail().isEmail().isLength({ max: 50 }),
+        check("email").isEmail().isLength({ max: 50 }),
         check("passWord").isLength({ min: 6 })
     ],
     postLoginUser

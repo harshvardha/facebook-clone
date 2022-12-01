@@ -6,7 +6,8 @@ import {
     getTimelinePosts,
     postCreatePost,
     putLikePost,
-    putUpdatePost
+    putUpdatePost,
+    getUsersAllPosts
 } from "../controllers/post.controller.js";
 import verifyToken from "../middlewares/verifyAccessToken.middleware.js";
 
@@ -40,6 +41,9 @@ postRouter.put("/like/:postId", verifyToken, putLikePost);
 
 // get timeline posts
 postRouter.get("/timeline", verifyToken, getTimelinePosts);
+
+// get user's all posts
+postRouter.get("/allPosts", verifyToken, getUsersAllPosts);
 
 // get a post
 postRouter.get("/:postId", getPostById);

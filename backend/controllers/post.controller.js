@@ -118,11 +118,28 @@ const getTimelinePosts = async (req, res, next) => {
     }
 }
 
+const getUsersAllPosts = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const posts = await Post.find({ userId: userId });
+        if (posts) {
+            res.status(StatusCodes.OK).json(posts);
+        }
+        else {
+            next(createError(StatusCodes.NOT_FOUND, "You have not posted yet."));
+        }
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
 export {
     postCreatePost,
     putUpdatePost,
     deletePost,
     putLikePost,
     getPostById,
-    getTimelinePosts
+    getTimelinePosts,
+    getUsersAllPosts
 }
