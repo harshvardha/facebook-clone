@@ -24,7 +24,7 @@ postRouter.post(
 
 // update a post
 postRouter.put(
-    "/upadte/:postId",
+    "/update/:postId",
     [
         check("description").isLength({ max: 500 })
     ],
