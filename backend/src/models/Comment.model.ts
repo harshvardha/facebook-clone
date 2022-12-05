@@ -13,6 +13,14 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
+    likes: {
+        type: Array,
+        default: []
+    },
+    hearts: {
+        type: Array,
+        default: []
+    },
     reply: {
         type: Array,
         default: []

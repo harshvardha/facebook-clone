@@ -12,6 +12,14 @@ const replyCommentSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    likes: {
+        type: Array,
+        default: []
+    },
+    hearts: {
+        type: Array,
+        default: []
     }
 }, { timestamps: true });
 

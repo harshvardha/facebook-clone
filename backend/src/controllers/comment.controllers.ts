@@ -4,6 +4,7 @@ import CustomError from "../errors/createError";
 import Post from "../models/Post.model";
 import { StatusCodes } from "http-status-codes";
 import { NextFunction, Request, Response } from "express";
+import { Document, Query } from "mongoose";
 
 const addComment = async (req: Request | any, res: Response, next: NextFunction) => {
     try {
@@ -83,9 +84,105 @@ const addReplyToComment = async (req: Request | any, res: Response, next: NextFu
     }
 }
 
+const putLikeOnComment = async (req: Request | any, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user.id;
+        const commentId = req.params.commentId;
+        const comment = await Comment.findById(commentId);
+        if (!comment?.likes?.includes(userId)) {
+            await comment?.updateOne({
+                $push: { likes: userId }
+            });
+            res.status(StatusCodes.OK).json({ message: "Like added." });
+        }
+        else {
+            await comment?.updateOne({
+                $pull: { likes: userId }
+            });
+            res.status(StatusCodes.OK).json({ message: "Like removed." });
+        }
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
+const putHeartOnComment = async (req: Request | any, res: Response, next: NextFunction) => {
+    try {
+        const userId: string = req.user.id;
+        const commentId: string = req.params.commentId;
+        const comment = await Comment.findById(commentId);
+        if (!comment?.hearts?.includes(userId)) {
+            await comment?.updateOne({
+                $push: { hearts: userId }
+            });
+            res.status(StatusCodes.OK).json({ message: "Heart added." });
+        }
+        else {
+            await comment?.updateOne({
+                $pull: { likes: userId }
+            });
+            res.status(StatusCodes.OK).json({ message: "Heart removed." });
+        }
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
+const putLikeOnReplyComment = async (req: Request | any, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user.id;
+        const replyCommentId = req.params.commentId;
+        const replyComment = await ReplyComment.findById(replyCommentId);
+        if (!replyComment?.likes?.includes(userId)) {
+            await replyComment?.updateOne({
+                $push: { likes: userId }
+            });
+            res.status(StatusCodes.OK).json({ message: "Like added." });
+        }
+        else {
+            await replyComment.updateOne({
+                $pull: { likes: userId }
+            });
+            res.status(StatusCodes.OK).json({ message: "Like removed." });
+        }
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
+const putHeartOnReplyComment = async (req: Request | any, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user.id;
+        const replyCommentId = req.params.commentId;
+        const replyComment = await ReplyComment.findById(replyCommentId);
+        if (!replyComment?.hearts?.includes(userId)) {
+            await replyComment?.updateOne({
+                $push: { hearts: userId }
+            });
+            res.status(StatusCodes.OK).json({ message: "Heart added." });
+        }
+        else {
+            await replyComment.updateOne({
+                $pull: { hearts: userId }
+            });
+            res.status(StatusCodes.OK).json({ message: "Heart removed." });
+        }
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
 export {
     addComment,
     deleteComment,
     getComments,
-    addReplyToComment
+    addReplyToComment,
+    putLikeOnComment,
+    putHeartOnComment,
+    putLikeOnReplyComment,
+    putHeartOnReplyComment
 };
