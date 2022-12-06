@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .section-min-height {
+        height: calc(100vh - 50px);
+    }
+
+    .webkit-box-shadow {
+        --webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+        box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    }
+}

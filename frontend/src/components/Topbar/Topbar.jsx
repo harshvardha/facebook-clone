@@ -1,42 +1,47 @@
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import "./Topbar.css";
+import { Users } from "../../dummyData";
 
 const Topbar = ({ user }) => {
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     return (
-        <div className="topbarContainer">
-            <div className="topbarLeft">
+        <div className="h-12 w-full bg-[#1877f2] flex items-center sticky top-0 z-10">
+            <div className="flex-[3.25]">
                 <Link to={"/"} style={{ textDecoration: "none" }}>
-                    <span className="logo">Facebook-clone</span>
+                    <span className="text-2xl ml-5 font-bold text-white cursor-pointer">Facebook-clone</span>
                 </Link>
             </div>
-            <div className="topbarCenter">
-                <div className="searchbar">
-                    <Search className="searchIcon" />
-                    <input placeholder="Search for friend, post or video" className="searchInput" />
+            <div className="flex-[5]">
+                <div className="w-full h-8 bg-white rounded-[30px] flex items-center">
+                    <Search className="text-xl ml-3" />
+                    <input placeholder="Search for friend, post or video" className="border-none w-[70%] ml-1" />
                 </div>
             </div>
-            <div className="topbarRight">
-                <div className="topbarLinks">
-                    <span className="topbarLink">Homepage</span>
-                    <span className="topbarLink">Timeline</span>
+            <div className="flex-[4] flex items-center justify-around text-white">
+                <div className="ml-7 text-sm cursor-pointer flex gap-x-3">
+                    <span className="mr-3 text-sm cursor-pointer">Homepage</span>
+                    <span className="text-sm cursor-pointer">Timeline</span>
                 </div>
-                <div className="topbarIcons">
-                    <div className="topbarIconItem">
+                <div className="flex">
+                    <div className="mr-4 cursor-pointer relative">
                         <Person />
-                        <span className="topbarIconBadge">1</span>
+                        <span className="w-4 h-4 bg-red-500 rounded-full text-white absolute -top-1 -right-1 flex items-center justify-center text-xs">1</span>
                     </div>
-                    <div className="topbarIconItem">
+                    <div className="mr-4 cursor-pointer relative">
                         <Chat />
-                        <span className="topbarIconBadge">2</span>
+                        <span className="w-4 h-4 bg-red-500 rounded-full text-white absolute -top-1 -right-1 flex items-center justify-center text-xs">2</span>
                     </div>
-                    <div className="topbarIconItem">
+                    <div className="mr-4 cursor-pointer relative">
                         <Notifications />
-                        <span className="topbarIconBadge">1</span>
+                        <span className="w-4 h-4 bg-red-500 rounded-full text-white absolute -top-1 -right-1 flex items-center justify-center text-xs">1</span>
                     </div>
                 </div>
-                <Link>
-                    <img src={user.profilePicture ? user.profilePicture : PF + "person/noAvatar.png"} alt="" className="topbarImage" />
+                <Link to={"/profile/"}>
+                    <img
+                        className="w-8 h-8 rounded-full object-cover cursor-pointer"
+                        src={Users[0].profilePicture ? PF + Users[0].profilePicture : PF + "person/noAvatar.png"}
+                        alt=""
+                    />
                 </Link>
             </div>
         </div>

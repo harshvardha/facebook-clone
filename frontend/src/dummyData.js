@@ -3,51 +3,81 @@ export const Users = [
         id: 1,
         profilePicture: "person/1.jpeg",
         username: "Safak Kocaoglu",
+        city: "Raebareli",
+        from: "Raebareli",
+        relationship: 1
     },
     {
         id: 2,
         profilePicture: "person/2.jpeg",
         username: "Janell Shrum",
+        city: "Lucknow",
+        from: "Jaipur",
+        relationship: 2
     },
     {
         id: 3,
         profilePicture: "person/3.jpeg",
         username: "Alex Durden",
+        city: "Jalandhar",
+        from: "Jaipur",
+        relationship: 3
     },
     {
         id: 4,
         profilePicture: "person/4.jpeg",
         username: "Dora Hawks",
+        city: "Bangalore",
+        from: "Belgaum",
+        relationship: 2
     },
     {
         id: 5,
         profilePicture: "person/5.jpeg",
         username: "Thomas Holden",
+        city: "Bangalore",
+        from: "Raebareli",
+        relationship: 1
     },
     {
         id: 6,
         profilePicture: "person/6.jpeg",
         username: "Shirley Beauchamp",
+        city: "Mumbai",
+        from: "Lucknow",
+        relationship: 2
     },
     {
         id: 7,
         profilePicture: "person/7.jpeg",
         username: "Travis Bennett",
+        city: "Hyderabad",
+        from: "Delhi",
+        relationship: 2
     },
     {
         id: 8,
         profilePicture: "person/8.jpeg",
         username: "Kristen Thomas",
+        city: "Chandigarh",
+        from: "Bangalore",
+        relationship: 1
     },
     {
         id: 9,
         profilePicture: "person/9.jpeg",
         username: "Gary Duty",
+        city: "Gurgaon",
+        from: "Raebareli",
+        relationship: 1
     },
     {
         id: 10,
         profilePicture: "person/10.jpeg",
         username: "Safak Kocaoglu",
+        city: "Noida",
+        from: "Raebareli",
+        relationship: 2
     },
 ];
 

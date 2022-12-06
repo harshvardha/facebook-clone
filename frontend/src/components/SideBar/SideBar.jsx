@@ -11,53 +11,52 @@ import {
 } from "@mui/icons-material";
 import { Users } from "../../dummyData";
 import CloseFriend from "../CloseFriends/CloseFriend";
-import "./SideBar.css";
 
 const SideBar = () => {
     return (
-        <div className="sidebar">
-            <div className="sidebarWrapper">
-                <ul className="sidebarList">
-                    <li className="sidebarListItem">
-                        <RssFeed className="sidebarIcon" />
-                        <span className="sidebarListItemText">Feed</span>
+        <div className="flex-[3] section-min-height overflow-y-scroll sticky top-12">
+            <div className="p-5">
+                <ul className="p-0 m-0 list-none">
+                    <li className="flex items-center mb-5">
+                        <RssFeed className="mr-3" />
+                        <span className="text-base font-normal">Feed</span>
                     </li>
-                    <li className="sidebarListItem">
-                        <Chat className="sidebarIcon" />
-                        <span className="sidebarListItemText">Chats</span>
+                    <li className="flex items-center mb-5">
+                        <Chat className="mr-3" />
+                        <span className="text-base font-normal">Chats</span>
                     </li>
-                    <li className="sidebarListItem">
-                        <PlayCircle className="sidebarIcon" />
-                        <span className="sidebarListItemText">Videos</span>
+                    <li className="flex items-center mb-5">
+                        <PlayCircle className="mr-3" />
+                        <span className="text-base font-normal">Videos</span>
                     </li>
-                    <li className="sidebarListItem">
-                        <Group className="sidebarIcon" />
-                        <span className="sidebarListItemText">Groups</span>
+                    <li className="flex items-center mb-5">
+                        <Group className="mr-3" />
+                        <span className="text-base font-normal">Groups</span>
                     </li>
-                    <li className="sidebarListItem">
-                        <BookmarkOutlined className="sidebarIcon" />
-                        <span className="sidebarListItemText">Bookmarks</span>
+                    <li className="flex items-center mb-5">
+                        <BookmarkOutlined className="mr-3" />
+                        <span className="text-base font-normal">Bookmarks</span>
                     </li>
-                    <li className="sidebarListItem">
-                        <HelpOutlineOutlined className="sidebarIcon" />
-                        <span className="sidebarListItemText">Questions</span>
+                    <li className="flex items-center mb-5">
+                        <HelpOutlineOutlined className="mr-3" />
+                        <span className="text-base font-normal">Questions</span>
                     </li>
-                    <li className="sidebarListItem">
-                        <WorkOutlineOutlined className="sidebarIcon" />
-                        <span className="sidebarListItemText">Jobs</span>
+                    <li className="flex items-center mb-5">
+                        <WorkOutlineOutlined className="mr-3" />
+                        <span className="text-base font-normal">Jobs</span>
                     </li>
-                    <li className="sidebarListItem">
-                        <Event className="sidebarIcon" />
-                        <span className="sidebarListItemText">Events</span>
+                    <li className="flex items-center mb-5">
+                        <Event className="mr-3" />
+                        <span className="text-base font-normal">Events</span>
                     </li>
-                    <li className="sidebarListItem">
-                        <School className="sidebarIcon" />
-                        <span className="sidebarListItemText">Courses</span>
+                    <li className="flex items-center mb-5">
+                        <School className="mr-3" />
+                        <span className="text-base font-normal">Courses</span>
                     </li>
                 </ul>
-                <button className="sidebarButton">Show More</button>
-                <hr className="sidebarHr" />
-                <ul className="sidebarFriendList">
+                <button className=" w-[9.3rem] border-none p-2 rounded-md font-medium bg-gray-300">Show More</button>
+                <hr className="mt-5 mb-5" />
+                <ul className="p-0 m-0 list-none">
                     {Users.map(user => <CloseFriend key={user.id} user={user} />)}
                 </ul>
             </div>
