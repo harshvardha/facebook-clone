@@ -9,7 +9,7 @@ const Home = () => {
             <Topbar />
             <div className="flex w-full">
                 <SideBar />
-                <Feed />
+                <Feed username={""} />
                 <RightBar />
             </div>
         </div>

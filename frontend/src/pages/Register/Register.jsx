@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { authenticationApiCalls } from "../../apiCalls";
 
 const Register = () => {
     const [username, setUsername] = useState("");
@@ -11,10 +11,25 @@ const Register = () => {
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        console.log("username: ", username);
-        console.log("email: ", email);
-        console.log("password: ", password);
-        console.log("password again: ", passwordAgain);
+        try {
+            if (!username || !email || !password || !passwordAgain) {
+                return window.alert("Please provide all the required details");
+            }
+            if (password.toLowerCase() !== passwordAgain.toLowerCase()) {
+                return window.alert("Password and Confirm password are not matching.");
+            }
+            const signupDetails = {
+                username,
+                email,
+                passWord: password
+            };
+            const response = await authenticationApiCalls.register(signupDetails);
+            if (response.status === 201) {
+                navigateTo("/")
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -33,6 +48,7 @@ const Register = () => {
                                 placeholder="Username"
                                 value={username}
                                 onChange={(event) => setUsername(event.target.value)}
+                                required
                             />
                             <input
                                 className="h-16 rounded-xl border border-solid border-gray-900 text-lg pl-5"
@@ -40,6 +56,7 @@ const Register = () => {
                                 placeholder="email"
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
+                                required
                             />
                             <input
                                 className="h-16 rounded-xl border border-solid border-gray-900 text-lg pl-5"
@@ -47,6 +64,7 @@ const Register = () => {
                                 placeholder="Password"
                                 value={password}
                                 onChange={(event) => setPassword(event.target.value)}
+                                required
                             />
                             <input
                                 className="h-16 rounded-xl border border-solid border-gray-900 text-lg pl-5"
@@ -54,6 +72,7 @@ const Register = () => {
                                 placeholder="Confirm Password"
                                 value={passwordAgain}
                                 onChange={(event) => setPasswordAgain(event.target.value)}
+                                required
                             />
                             <button
                                 className="h-16 rounded-xl border-none bg-[#1775ee] text-white text-xl font-medium cursor-pointer"
@@ -61,11 +80,9 @@ const Register = () => {
                             >
                                 Sign Up
                             </button>
-                            <button
-                                className="w-1/2 self-center h-16 rounded-xl border-none bg-[#42b72a] text-white text-xl font-medium cursor-pointer"
-                            >
+                            <Link to={"/"} className="w-1/2 self-center flex items-center justify-center h-16 rounded-xl border-none bg-[#42b72a] text-white text-xl font-medium cursor-pointer text-center">
                                 Log into Account
-                            </button>
+                            </Link>
                         </div>
                     </form>
                 </div>

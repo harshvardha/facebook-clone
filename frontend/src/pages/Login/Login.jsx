@@ -1,16 +1,34 @@
-import { useContext, useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { loginCall } from "../../apiCalls";
-import { AuthContext } from "../../context/AuthContext";
+import { authenticationApiCalls } from "../../apiCalls.js";
+import { AppContext } from "../../context/AppContext.js";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { setUser } = useContext(AppContext);
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
-        console.log("email: ", email);
-        console.log("password: ", password);
+        try {
+            if (!email || !password) {
+                return window.alert("Please provide all the required details");
+            }
+            const loginDetails = {
+                email,
+                passWord: password
+            };
+            const response = await authenticationApiCalls.login(loginDetails);
+            if (response.status === 200) {
+                const accessToken = response.data.accessToken;
+                const userDetails = response.data.others;
+                console.log(userDetails);
+                localStorage.setItem("ACCESS_TOKEN", accessToken);
+                setUser(userDetails);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -32,7 +50,7 @@ const Login = () => {
                         />
                         <input
                             className="h-12 rounded-xl border border-solid border-gray-900 text-lg pl-5"
-                            type="text"
+                            type="password"
                             placeholder="password"
                             value={password}
                             required

@@ -11,8 +11,12 @@ import {
 } from "@mui/icons-material";
 import { Users } from "../../dummyData";
 import CloseFriend from "../CloseFriends/CloseFriend";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext";
 
 const SideBar = () => {
+    const { user } = useContext(AppContext);
+
     return (
         <div className="flex-[3] section-min-height overflow-y-scroll sticky top-12">
             <div className="p-5">
@@ -57,7 +61,7 @@ const SideBar = () => {
                 <button className=" w-[9.3rem] border-none p-2 rounded-md font-medium bg-gray-300">Show More</button>
                 <hr className="mt-5 mb-5" />
                 <ul className="p-0 m-0 list-none">
-                    {Users.map(user => <CloseFriend key={user.id} user={user} />)}
+                    {user?.followers?.map(userId => <CloseFriend key={userId} userId={userId} />)}
                 </ul>
             </div>
         </div>

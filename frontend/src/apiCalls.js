@@ -23,8 +23,12 @@ export const usersApiCalls = {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
         return api.delete(baseUrl + "/users/delete");
     },
-    getUser: (query) => {
+    getUserByUsername: (query) => {
         return api.get(baseUrl + `/users/search?query=${query}`);
+    },
+    getUserById: (userId, accessToken) => {
+        api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
+        return api.get(baseUrl + `/user/${userId}`);
     },
     follow: (userId, accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
