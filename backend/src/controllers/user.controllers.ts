@@ -81,6 +81,24 @@ const getUser = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+const getUserById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const searchId = req.params.userId;
+        if (!searchId) {
+            return next(new CustomError(StatusCodes.UNPROCESSABLE_ENTITY, "Please provide correct user id."));
+        }
+        const foundUser = await User.findById(searchId);
+        if (!foundUser) {
+            return next(new CustomError(StatusCodes.NOT_FOUND, "User not found"));
+        }
+        const { password, updatedAt, ...others } = foundUser._doc;
+        res.status(StatusCodes.OK).json(others);
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
 const putFollowUser = async (req: Request | any, res: Response, next: NextFunction) => {
     try {
         const id: string = req.params.userId;
@@ -133,6 +151,7 @@ export {
     putUpdatePassword,
     deleteUser,
     getUser,
+    getUserById,
     putFollowUser,
     putUnfollowUser
 }

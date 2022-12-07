@@ -6,7 +6,8 @@ import {
     deleteUser,
     getUser,
     putFollowUser,
-    putUnfollowUser
+    putUnfollowUser,
+    getUserById
 } from "../controllers/user.controllers";
 import verifyToken from "../middlewares/verifyAccessToken.middleware";
 
@@ -36,7 +37,7 @@ userRouter.put(
 // delete user
 userRouter.delete("/delete", verifyToken, deleteUser);
 
-// get a user
+// get a user by username
 userRouter.get("/search", getUser);
 
 // follow a user
@@ -44,5 +45,8 @@ userRouter.put("/follow/:userId", verifyToken, putFollowUser);
 
 // unfollow a user
 userRouter.put("/unfollow/:userId", verifyToken, putUnfollowUser);
+
+// get user by id
+userRouter.get("/:userId", verifyToken, getUserById);
 
 export default userRouter;
