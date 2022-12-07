@@ -1,8 +1,8 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 const postSchema: Schema = new Schema({
     userId: {
-        type: String,
+        type: Types.ObjectId,
         required: true
     },
     description: {
