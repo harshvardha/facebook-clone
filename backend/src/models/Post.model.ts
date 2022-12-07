@@ -15,6 +15,10 @@ const postSchema: Schema = new Schema({
     likes: {
         type: Array,
         default: []
+    },
+    hearts: {
+        type: Array,
+        default: []
     }
 }, { timestamps: true });
 

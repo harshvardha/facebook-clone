@@ -7,7 +7,8 @@ import {
     postCreatePost,
     putLikePost,
     putUpdatePost,
-    getUsersAllPosts
+    getUsersAllPosts,
+    putHeartPost
 } from "../controllers/post.controller";
 import verifyToken from "../middlewares/verifyAccessToken.middleware";
 
@@ -38,6 +39,9 @@ postRouter.delete("/delete/:postId", verifyToken, deletePost);
 
 // like a post
 postRouter.put("/like/:postId", verifyToken, putLikePost);
+
+// heart a post
+postRouter.put("/heart/:postId", verifyToken, putHeartPost);
 
 // get timeline posts
 postRouter.get("/timeline", verifyToken, getTimelinePosts);

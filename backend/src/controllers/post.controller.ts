@@ -89,6 +89,29 @@ const putLikePost = async (req: Request | any, res: Response, next: NextFunction
     }
 }
 
+const putHeartPost = async (req: Request | any, res: Response, next: NextFunction) => {
+    try {
+        const postId: string = req.params.postId;
+        const userId: string = req.user.id;
+        const post: Document | any = await Post.findById(postId);
+        if (!post.hearts.includes(userId)) {
+            await post.updateOne({
+                $push: { hearts: userId }
+            });
+            res.status(StatusCodes.OK).json({ message: "Heart added." });
+        }
+        else {
+            await post.updateOne({
+                $pull: { hearts: userId }
+            });
+            res.status(StatusCodes.OK).json({ message: "Heart removed." })
+        }
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
 const getPostById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const postId: string = req.params.postId;
@@ -141,6 +164,7 @@ export {
     putUpdatePost,
     deletePost,
     putLikePost,
+    putHeartPost,
     getPostById,
     getTimelinePosts,
     getUsersAllPosts
