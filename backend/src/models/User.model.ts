@@ -27,14 +27,18 @@ const userSchema: Schema = new Schema({
         type: String,
         default: ""
     },
-    followers: {
-        type: Array,
-        default: []
-    },
-    following: {
-        type: Array,
-        default: []
-    },
+    followers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ],
+    following: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ],
     isAdmin: {
         type: Boolean,
         default: false
