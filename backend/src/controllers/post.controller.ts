@@ -130,12 +130,14 @@ const getTimelinePosts = async (req: Request | any, res: Response, next: NextFun
     try {
         const userId: string = req.user.id;
         const user: Document | any = await User.findById(userId);
+        console.log(user);
         const userPosts = await Post.find({ userId: userId }).populate("userId");
         const friendsPost = await Promise.all(
             user.following.map((friendId: string) => {
-                Post.find({ userId: friendId }).populate("userId");
+                return Post.find({ userId: friendId }).populate("userId");
             })
         );
+        console.log(friendsPost);
         res.status(StatusCodes.OK).json(userPosts.concat(...friendsPost));
     } catch (error) {
         console.log(error);
