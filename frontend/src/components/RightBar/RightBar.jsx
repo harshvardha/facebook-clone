@@ -28,22 +28,22 @@ const RightBar = ({ user }) => {
                 <div className="mb-[1.875rem]">
                     <div className="mb-[0.875rem]">
                         <span className="font-medium mr-[0.3125rem] text-[#555]">City:</span>
-                        <span className="font-light">{user.city}</span>
+                        <span className="font-light">{user?.city}</span>
                     </div>
                     <div className="mb-[0.875rem]">
                         <span className="font-medium mr-[0.3125rem]">From:</span>
-                        <span className="font-light">{user.from}</span>
+                        <span className="font-light">{user?.from}</span>
                     </div>
                     <div className="mb-[0.875rem]">
                         <span className="font-medium mr-[0.3125rem]">Relationship:</span>
-                        <span className="font-light">{user.relationship === 1 ? "Single" : user.relationship === 2 ? "Married" : "-"}</span>
+                        <span className="font-light">{user?.relationship === 1 ? "Single" : user?.relationship === 2 ? "Married" : "-"}</span>
                     </div>
                 </div>
                 <h4 className="text-lg font-medium mb-[0.625rem]">User friends</h4>
                 <div className="flex flex-wrap justify-between">
                     <div className="flex flex-col mb-5 cursor-pointer">
                         <img src={`${PF}person/1.jpeg`} alt="" className=" w-[6.25rem] h-[6.25rem] object-cover rounded-md" />
-                        <span className="">{user.username}</span>
+                        <span className="">{user?.username}</span>
                     </div>
                 </div>
             </>
