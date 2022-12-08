@@ -1,9 +1,10 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const postSchema: Schema = new Schema({
     userId: {
-        type: Types.ObjectId,
-        required: true
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "User"
     },
     description: {
         type: String,
@@ -17,6 +18,10 @@ const postSchema: Schema = new Schema({
         default: []
     },
     hearts: {
+        type: Array,
+        default: []
+    },
+    comments: {
         type: Array,
         default: []
     }
