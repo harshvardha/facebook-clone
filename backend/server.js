@@ -18,9 +18,9 @@ app.use(cors({
 app.use(helmet());
 app.use(morgan("common"));
 
-app.use("/authentication", authenticationRouter);
-app.use("/users", userRouter);
-app.use("/posts", postRouter);
+app.use("/api/authentication", authenticationRouter);
+app.use("/api/users", userRouter);
+app.use("/api/posts", postRouter);
 
 app.use((error, req, res, next) => {
     const status = error.status || 500;

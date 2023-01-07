@@ -16,7 +16,7 @@ const userRouter = Router();
 userRouter.put(
     "/update",
     [
-        check("email").isLength({ max: 50 }).isEmail(),
+        check("email").isEmail(),
         check("username").isLength({ min: 3, max: 50 })
     ],
     verifyToken,

@@ -11,7 +11,7 @@ const authenticationRouter = Router();
 authenticationRouter.post(
     "/register",
     [
-        check("email").normalizeEmail().isEmail().isLength({ max: 50 }),
+        check("email").isEmail(),
         check("username").isLength({ min: 3, max: 20 }),
         check("passWord").isLength({ min: 6 })
     ],

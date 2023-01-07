@@ -36,7 +36,6 @@ const postRegisterNewUser = async (req, res, next) => {
 const postLoginUser = async (req, res, next) => {
     try {
         const errors = validationResult(req);
-        console.log(errors);
         if (!errors.isEmpty()) {
             return next(createError(StatusCodes.BAD_REQUEST, "Please provide correct login credentials."));
         }

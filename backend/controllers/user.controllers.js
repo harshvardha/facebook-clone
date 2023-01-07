@@ -23,7 +23,7 @@ const putUpdateUser = async (req, res, next) => {
         const userId = req.user.id;
         const updatedUser = await User.findByIdAndUpdate(userId, { ...req.body }, { new: true });
         const { password, updatedAt, ...others } = updatedUser._doc;
-        res.status(StatusCodes.OK).json(updatedUser);
+        res.status(StatusCodes.OK).json(others);
     } catch (error) {
         console.log(error);
         next(error);
