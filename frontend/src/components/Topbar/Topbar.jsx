@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./Topbar.css";
 
 const Topbar = ({ user }) => {
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
@@ -36,7 +38,7 @@ const Topbar = ({ user }) => {
                     </div>
                 </div>
                 <Link>
-                    <img src={user.profilePicture ? user.profilePicture : PF + "person/noAvatar.png"} alt="" className="topbarImage" />
+                    <img src={PF + "person/noAvatar.png"} alt="" className="topbarImage" />
                 </Link>
             </div>
         </div>

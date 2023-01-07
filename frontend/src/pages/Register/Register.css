@@ -39,11 +39,11 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    row-gap: 1rem;
     justify-content: space-between;
 }
 
 .loginInput {
-    height: 50px;
     border-radius: 10px;
     border: 1px solid gray;
     font-size: 18px;
@@ -55,13 +55,13 @@
 }
 
 .loginButton {
-    height: 50px;
     border-radius: 10px;
     border: none;
     background-color: #1775ee;
     color: white;
     font-size: 20px;
     font-weight: 500;
+    padding: 0.625rem;
     cursor: pointer;
 }
 
@@ -71,14 +71,13 @@
 }
 
 .loginRegisterButton {
-    width: 50%;
     align-self: center;
-    height: 50px;
     border-radius: 10px;
     border: none;
     background-color: #42b72a;
     color: white;
     font-size: 20px;
     font-weight: 500;
+    padding: 0.625rem 1rem;
     cursor: pointer;
 }

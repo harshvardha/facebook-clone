@@ -1,4 +1,4 @@
-import axios from "axios";
+import { authenticationApiRequests } from "../../services/apiCalls";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
@@ -16,16 +16,22 @@ const Register = () => {
             passwordAgain.current.setCustomValidity("Passwords don't match!");
         }
         else {
-            const user = {
+            const registerDetails = {
                 username: username.current.value,
                 email: email.current.value,
                 passWord: password.current.value
             };
             try {
-                await axios.post("http://localhost:5000/authentication/register", user)
-                navigateTo("/login");
+                console.log("register details: ", registerDetails);
+                const response = await authenticationApiRequests.register(registerDetails);
+                console.log(response);
+                if (response.status === 201) {
+                    window.alert("User registered.");
+                    navigateTo("/");
+                }
             } catch (error) {
                 console.log(error);
+                window.alert("Something went wrong.");
             }
         }
     }
