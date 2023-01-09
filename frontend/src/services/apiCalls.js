@@ -13,24 +13,28 @@ export const authenticationApiRequests = {
 export const userApiRequests = {
     updateUser: (userDetails, accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.put(`${baseUrl}/api/users/update`, userDetails);
+        return api.put(`${baseUrl}/users/update`, userDetails);
     },
     updatePassword: (newPassword, accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.put(`${baseUrl}/api/users/updatePassword`, newPassword);
+        return api.put(`${baseUrl}/users/updatePassword`, newPassword);
     },
     follow: (userId, accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.put(`${baseUrl}/api/users/follow/${userId}`);
+        return api.put(`${baseUrl}/users/follow/${userId}`);
     },
     unFollow: (userId, accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.put(`${baseUrl}/api/users/unfollow/${userId}`);
+        return api.put(`${baseUrl}/users/unfollow/${userId}`);
     },
-    search: (username) => api.get(`${baseUrl}/api/users/search?query=${username}`),
+    search: (username) => api.get(`${baseUrl}/users/search?query=${username}`),
+    getUserById: (accessToken, userId) => {
+        api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
+        return api.get(`${baseUrl}/users/user/${userId}`);
+    },
     delete: (accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.delete(`${baseUrl}/api/users/delete`);
+        return api.delete(`${baseUrl}/users/delete`);
     }
 }
 
@@ -38,27 +42,27 @@ export const userApiRequests = {
 export const postsApiRequests = {
     create: (postDetails, accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.post(`${baseUrl}/api/posts/create`, postDetails);
+        return api.post(`${baseUrl}/posts/create`, postDetails);
     },
     update: (postId, updateDetails, accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.put(`${baseUrl}/api/posts/update/${postId}`, updateDetails);
+        return api.put(`${baseUrl}/posts/update/${postId}`, updateDetails);
     },
     delete: (postId, accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.delete(`${baseUrl}/api/posts/delete/${postId}`);
+        return api.delete(`${baseUrl}/posts/delete/${postId}`);
     },
     like: (postId, accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.put(`${baseUrl}/api/posts/like/${postId}`);
+        return api.put(`${baseUrl}/posts/like/${postId}`);
     },
     getTimelinePosts: (accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.get(`${baseUrl}/api/posts/timeline`);
+        return api.get(`${baseUrl}/posts/timeline`);
     },
     getAllPosts: (accessToken) => {
         api.defaults.headers.common["authorization"] = "Bearer " + accessToken;
-        return api.get(`${baseUrl}/api/posts/allPosts`);
+        return api.get(`${baseUrl}/posts/allPosts`);
     },
-    getPostById: (postId) => api.get(`${baseUrl}/api/posts/${postId}`)
+    getPostById: (postId) => api.get(`${baseUrl}/posts/${postId}`)
 }
