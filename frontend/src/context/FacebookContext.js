@@ -5,12 +5,15 @@ const FacebookCloneContext = React.createContext();
 
 const FacebookCloneProvider = ({ children }) => {
     const [user, setUser] = useState("");
+    const [posts, setPosts] = useState([]);
 
     return (
         <FacebookCloneContext.Provider
             value={{
                 user,
-                setUser
+                posts,
+                setUser,
+                setPosts
             }}
         >
             {children}
