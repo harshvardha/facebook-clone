@@ -126,11 +126,35 @@ const putUnfollowUser = async (req, res, next) => {
     }
 }
 
+const getUserById = async (req, res, next) => {
+    try {
+        const userId = req.params.userId;
+        console.log(userId);
+        if (!userId) {
+            return next(createError(StatusCodes.BAD_REQUEST, "Please provide user id."));
+        }
+        const user = await User.findById(userId);
+        console.log(user);
+        if (!user) {
+            return next(createError(StatusCodes.NOT_FOUND, "User not found."));
+        }
+        const response = {
+            profilePicture: user.profilePictureUrl,
+            username: user.username
+        };
+        res.status(StatusCodes.OK).json(response);
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
 export {
     putUpdateUser,
     putUpdatePassword,
     deleteUser,
     getUser,
+    getUserById,
     putFollowUser,
     putUnfollowUser
 }
