@@ -7,6 +7,7 @@ import User from "../models/User.model.js";
 const postCreatePost = async (req, res, next) => {
     try {
         const errors = validationResult(req);
+        console.log(errors);
         if (!errors.isEmpty()) {
             return next(createError(StatusCodes.UNPROCESSABLE_ENTITY, "Please provide description within 500 characters."));
         }
@@ -108,7 +109,7 @@ const getTimelinePosts = async (req, res, next) => {
         const userPosts = await Post.find({ userId: userId });
         const friendsPost = await Promise.all(
             user.following.map(friendId => {
-                Post.find({ userId: friendId });
+                return Post.find({ userId: friendId });
             })
         );
         res.status(StatusCodes.OK).json(userPosts.concat(...friendsPost));

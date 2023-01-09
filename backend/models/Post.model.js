@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const postSchema = new Schema({
     userId: {
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true
     },
     description: {
