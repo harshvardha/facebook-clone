@@ -1,25 +1,37 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { postsApiRequests } from "../../services/apiCalls";
 import Share from "../Share/Share";
 import Post from "../Post/Post";
 import "./Feed.css";
 
-const Feed = ({username}) => {
+const Feed = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const res = username ? await axios.get("/posts/allPosts") : await axios.get("/posts/timeline");
-            setPosts(res.data);
+        const fetchPosts = async () => {
+            try {
+                setIsLoading(true);
+                const accessToken = localStorage.getItem("ACCESS_TOKEN");
+                const response = await postsApiRequests.getTimelinePosts(accessToken);
+                console.log(response);
+                if (response.status === 200) {
+                    setPosts(response.data);
+                    setIsLoading(false);
+                }
+            } catch (error) {
+                console.log(error);
+                window.alert("Something went wrong.");
+            }
         }
-        fetchData();
-    }, [])
+        fetchPosts();
+    }, [postsApiRequests.getTimelinePosts]);
 
     return (
         <div className="feed">
             <div className="feedWrapper">
                 <Share />
-                {posts.map(post => <Post key={post._id} post={post} />)}
+                {!isLoading && posts.map(post => <Post key={post._id} post={post} />)}
             </div>
         </div>
     )

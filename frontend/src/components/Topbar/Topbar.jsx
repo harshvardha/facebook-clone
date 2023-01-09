@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { FacebookCloneContext } from "../../context/FacebookContext";
 import "./Topbar.css";
 
-const Topbar = ({ user }) => {
+const Topbar = () => {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const { user } = useContext(FacebookCloneContext);
 
     return (
         <div className="topbarContainer">
@@ -38,7 +41,7 @@ const Topbar = ({ user }) => {
                     </div>
                 </div>
                 <Link>
-                    <img src={PF + "person/noAvatar.png"} alt="" className="topbarImage" />
+                    <img src={user.profilePicture ? user.profilePicture : PF + "person/noAvatar.png"} alt="" className="topbarImage" />
                 </Link>
             </div>
         </div>

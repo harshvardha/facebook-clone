@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
     RssFeed,
     Chat,
@@ -9,11 +10,14 @@ import {
     Event,
     School
 } from "@mui/icons-material";
-import { Users } from "../../dummyData";
+// import { Users } from "../../dummyData";
 import CloseFriend from "../CloseFriends/CloseFriend";
+import { FacebookCloneContext } from "../../context/FacebookContext";
 import "./SideBar.css";
 
 const SideBar = () => {
+    const { user } = useContext(FacebookCloneContext);
+
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
@@ -58,7 +62,7 @@ const SideBar = () => {
                 <button className="sidebarButton">Show More</button>
                 <hr className="sidebarHr" />
                 <ul className="sidebarFriendList">
-                    {Users.map(user => <CloseFriend key={user.id} user={user} />)}
+                    {user.following.map(followingUser => <CloseFriend key={followingUser._id} user={followingUser} />)}
                 </ul>
             </div>
         </div>
