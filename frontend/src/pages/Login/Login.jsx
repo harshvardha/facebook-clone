@@ -1,16 +1,19 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authenticationApiRequests } from "../../services/apiCalls";
+import { FacebookCloneContext } from "../../context/FacebookContext";
 import "./Login.css";
 
 const Login = () => {
     const email = useRef();
     const password = useRef();
     const [isFetching, setIsFetching] = useState(false)
+    const { setUser } = useContext(FacebookCloneContext);
     const navigateTo = useNavigate();
 
     const handleLogin = async (event) => {
         event.preventDefault();
+        setIsFetching(true);
         try {
             if (!email.current.value || !password.current.value) {
                 return window.alert("Please provide all the required credentials.");
@@ -19,11 +22,13 @@ const Login = () => {
                 email: email.current.value,
                 passWord: password.current.value
             };
-            console.log(loginDetails);
             const response = await authenticationApiRequests.login(loginDetails);
             if (response.status === 200) {
                 const accessToken = response.data.accessToken;
+                const user = response.data.others;
                 localStorage.setItem("ACCESS_TOKEN", accessToken);
+                setUser(user);
+                setIsFetching(false);
                 navigateTo("/home");
             }
         } catch (error) {
